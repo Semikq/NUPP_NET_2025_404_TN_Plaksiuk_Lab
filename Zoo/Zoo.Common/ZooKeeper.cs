@@ -9,20 +9,28 @@ namespace Zoo.Common
     public class ZooKeeper
     {
         public Guid Id { get; set; }
-        public string FullName { get; set; }
+        public string FullName { get; set; } = string.Empty;
         public int ExperienceYears { get; set; }
-        public string Shift { get; set; }
+        public string Shift { get; set; } = string.Empty;
 
-        // делегат
-        public delegate void FeedAnimalsHandler(string message);
+        private List<Animal> _animals = new List<Animal>();
+        public IReadOnlyCollection<Animal> Animals => _animals.AsReadOnly();
 
-        // подія
-        public event FeedAnimalsHandler OnFeedAnimals;
+        public event Action<ZooKeeper, Animal>? OnFeedAnimals;
 
-        // метод для виклику події
+        public ZooKeeper(string fullName, int experienceYears, string shift)
+        {
+            FullName = fullName;
+            ExperienceYears = experienceYears;
+            Shift = shift;
+        }
+
         public void FeedAnimals()
         {
-            OnFeedAnimals?.Invoke($"{FullName} годує тварин на зміні {Shift}");
+            foreach (var animal in _animals)
+            {
+                OnFeedAnimals?.Invoke(this, animal);
+            }
         }
     }
 }

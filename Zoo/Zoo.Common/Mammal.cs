@@ -4,9 +4,9 @@ namespace Zoo.Common
 {
     public class Mammal : Animal
     {
-        public string FurColor { get; set; }
+        public string FurColor { get; set; } = string.Empty;
         public bool IsPredator { get; set; }
-        public string Habitat { get; set; }
+        public string Habitat { get; set; } = string.Empty;
 
         public Mammal() : base() { }
 
@@ -18,9 +18,29 @@ namespace Zoo.Common
             Habitat = habitat;
         }
 
-        public void Eat(string food)
+        public override void MakeSound()
         {
-            Console.WriteLine($"{Name} їсть {food}");
+            Console.WriteLine("Mammal sound");
+        }
+
+        public override void Eat()
+        {
+            Console.WriteLine($"{Name} їсть.");
+        }
+
+        public override void Sleep()
+        {
+            Console.WriteLine($"{Name} спить.");
+        }
+
+        public override void Feed()
+        {
+            Console.WriteLine($"{Name} харчується.");
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
         private static Random _rand = new Random();

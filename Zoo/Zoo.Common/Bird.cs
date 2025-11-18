@@ -40,5 +40,30 @@ namespace Zoo.Common
                 _beakTypes[_rand.Next(_beakTypes.Length)]
             );
         }
+
+        public override void MakeSound()
+        {
+            Console.WriteLine("Bird chirps");
+        }
+
+        public override void Eat()
+        {
+            Console.WriteLine($"{Name} їсть.");
+        }
+
+        public override void Sleep()
+        {
+            Console.WriteLine($"{Name} спить.");
+        }
+
+        public override void Feed()
+        {
+            Console.WriteLine($"{Name} харчується.");
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
