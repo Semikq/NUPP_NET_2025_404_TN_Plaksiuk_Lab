@@ -1,0 +1,12 @@
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\bin\Debug\net10.0\Zoo.Infrastructure.deps.json
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\bin\Debug\net10.0\Zoo.Infrastructure.dll
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\bin\Debug\net10.0\Zoo.Infrastructure.pdb
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.AssemblyInfo.cs
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.dll
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\refint\Zoo.Infrastructure.dll
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\Zoo.Infrastructure.pdb
+C:\Users\usern\OneDrive\Desktop\ZooSolution\Zoo.Infrastructure\obj\Debug\net10.0\ref\Zoo.Infrastructure.dll

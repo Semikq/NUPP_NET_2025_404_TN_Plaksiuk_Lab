@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Zoo.Infrastructure/Zoo.Infrastructure.csproj" />
+  <Project Path="Zoo.REST/Zoo.REST.csproj" />
+</Solution>
