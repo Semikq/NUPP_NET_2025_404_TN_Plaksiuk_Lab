@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Zoo.REST.Models;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,11 @@ public class AnimalsController : ControllerBase
     {
         var animals = await _animalService.ReadAllAsync();
 
+        if (animals == null)
+        {
+            return Ok(new List<AnimalModel>());
+        }
+
         var models = animals.Select(a => new AnimalModel
         {
             Id = a.Id,
@@ -28,7 +34,7 @@ public class AnimalsController : ControllerBase
             Name = a.Name,
             Age = a.Age,
             EnclosureId = a.EnclosureId
-        });
+        }).ToList();
 
         return Ok(models);
     }
@@ -58,8 +64,11 @@ public class AnimalsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "User,AA,Admin")]
     [ProducesResponseType(typeof(AnimalModel), 201)]
     [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     public async Task<ActionResult<AnimalModel>> Post([FromBody] AnimalCreateModel createModel)
     {
         if (!ModelState.IsValid)
@@ -93,9 +102,12 @@ public class AnimalsController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "BB,Admin")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     public async Task<IActionResult> Put(Guid id, [FromBody] AnimalModel updateModel)
     {
         if (id != updateModel.Id)
@@ -126,8 +138,11 @@ public class AnimalsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     public async Task<IActionResult> Delete(Guid id)
     {
         var animalToRemove = await _animalService.ReadAsync(id);
