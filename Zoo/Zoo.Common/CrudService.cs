@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.IO;
 
 namespace Zoo.Common
 {
     public class CrudService<T> : ICrudService<T> where T : class
     {
-        // внутрішня колекція для зберігання елементів
         private List<T> _items = new List<T>();
 
-        // функція для отримання Id через reflection
         private Guid GetId(T element)
         {
             var prop = typeof(T).GetProperty("Id");
@@ -18,25 +18,21 @@ namespace Zoo.Common
             return (Guid)prop.GetValue(element);
         }
 
-        // Create - додамо елемент
         public void Create(T element)
         {
             _items.Add(element);
         }
 
-        // Read - шукаємо елемент по Id
         public T Read(Guid id)
         {
             return _items.FirstOrDefault(e => GetId(e) == id);
         }
 
-        // ReadAll - повертає всі елементи
         public IEnumerable<T> ReadAll()
         {
             return _items;
         }
 
-        // Update - змінюємо існуючий елемент по Id
         public void Update(T element)
         {
             var id = GetId(element);
@@ -45,13 +41,37 @@ namespace Zoo.Common
                 _items[index] = element;
         }
 
-        // Remove - видаляємо елемент
         public void Remove(T element)
         {
             var id = GetId(element);
             var item = _items.FirstOrDefault(e => GetId(e) == id);
             if (item != null)
                 _items.Remove(item);
+        }
+
+        public void Save(string FilePath)
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+            var json = JsonSerializer.Serialize(_items, options);
+            File.WriteAllText(FilePath, json);
+        }
+
+        public void Load(string FilePath)
+        {
+            if (!File.Exists(FilePath))
+                throw new FileNotFoundException($"Файл не знайдено: {FilePath}");
+
+            var json = File.ReadAllText(FilePath);
+            var items = JsonSerializer.Deserialize<List<T>>(json);
+            
+            if (items != null)
+                _items = items;
+            else
+                _items = new List<T>();
         }
     }
 }
